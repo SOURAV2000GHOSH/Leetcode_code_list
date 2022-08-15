@@ -18,8 +18,6 @@ class Solution:
             if prev >= root.val:
                 return False
             prev=root.val
-            if not self.fun(root.right):
-                return False
-            return True
+            return self.fun(root.right)
             
         return True
