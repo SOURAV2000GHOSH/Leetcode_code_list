@@ -2,10 +2,10 @@ class Solution:
     def countPrimes(self, n: int) -> int:
          # Prerequisite:
         # What is prime number. What are they just the starting. 
-        
-        truth = [True]*n # making a list of lenght n. And keep all the values as True.
         if n<2: # as 0 & 1 are not prime numbers. 
             return 0
+        truth = [True]*n # making a list of lenght n. And keep all the values as True.
+        
         truth[0], truth[1] = False, False #as we added True in the truth list. So will make false for ) & 1 as they are not prime numbers.
         
         i=2 # As we know 0 & 1 are not prime.
