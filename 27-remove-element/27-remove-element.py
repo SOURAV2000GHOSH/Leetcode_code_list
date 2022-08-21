@@ -1,6 +1,5 @@
 class Solution:
     def removeElement(self, n: List[int], val: int) -> int:
-        #two pointer approch
         if len(n)==1 and n[0]==val:
             return 0
         index=0
