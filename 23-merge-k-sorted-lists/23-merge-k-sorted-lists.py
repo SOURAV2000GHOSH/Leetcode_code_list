@@ -6,6 +6,8 @@
 class Solution:
     def mergeKLists(self, l: List[Optional[ListNode]]) -> Optional[ListNode]:
         temp=[]
+        
+        #store all the value of linked list
         for x in l:
             ptr=x
             while ptr:
@@ -15,6 +17,8 @@ class Solution:
         temp.sort()
         head=ListNode(-432324)
         ptr=head
+        
+        #make tree node
         for el in temp:
             ptr.next=ListNode(el)
             ptr=ptr.next
