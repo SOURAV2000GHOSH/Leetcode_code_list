@@ -9,8 +9,7 @@ class Solution {
         while(a>0){
             rem=a%10;
             temp=(temp*10)+rem;
-            a=(int)a/10;
-            
+            a=a/10;  
         }
         if(temp==x){
             return true;
