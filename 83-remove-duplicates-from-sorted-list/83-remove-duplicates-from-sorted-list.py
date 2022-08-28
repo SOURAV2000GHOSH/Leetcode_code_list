@@ -9,11 +9,11 @@ class Solution:
             return head
         cur=head
         #nex=head.next
-        while cur.next:
+        while cur and cur.next:
             if cur.val == cur.next.val:
                 cur.next=cur.next.next
-            else:
-                cur=cur.next
+                continue
+            cur=cur.next
         
         return head
         
