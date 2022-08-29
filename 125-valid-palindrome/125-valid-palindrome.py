@@ -1,16 +1,17 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
         s=s.lower()
-        a=set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
-        temp=[]
-        for x in s:
-            if x not in a:
-                continue
-            temp.append(x)
+        a=set("abcdefghijklmnopqrstuvwxyz0123456789")
         left=0
-        right=len(temp)-1
+        right=len(s)-1
         while left<right:
-            if temp[left] != temp[right]:
+            if s[left] not in a:
+                left +=1
+                continue
+            if s[right] not in a:
+                right -= 1
+                continue
+            if s[left] != s[right]:
                 return False
             left += 1
             right -= 1
