@@ -23,4 +23,3 @@ class Solution:
                     q.append(el.left)
         return ans
         
-        
