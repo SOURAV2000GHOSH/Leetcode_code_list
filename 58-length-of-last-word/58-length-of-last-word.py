@@ -6,7 +6,6 @@ class Solution:
                 continue
             start=x
             break
-        cheak=set("abcdefgijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
         ans=0
         for x in range(start,-1,-1):
             if s[x]==' ':
