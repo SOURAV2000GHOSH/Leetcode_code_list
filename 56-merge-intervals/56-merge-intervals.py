@@ -3,7 +3,7 @@ class Solution:
         intervals.sort(key=lambda x : x[0])
         ans=[]
         cur=intervals[0]
-        for nexti in intervals[1:]:
+        for nexti in intervals:
             if nexti[0]<=cur[1] and nexti[1]>cur[1]:
                 cur=[cur[0],nexti[1]]
             if cur[0]<=nexti[0] and cur[1]>=nexti[1]:
