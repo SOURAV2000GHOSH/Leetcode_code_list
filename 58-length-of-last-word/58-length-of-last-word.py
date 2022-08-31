@@ -1,10 +1,14 @@
 class Solution:
     def lengthOfLastWord(self, s: str) -> int:
-        s=s.strip()
-        l=len(s)
+        strat=len(s)
+        for x in range(len(s)-1,-1,-1):
+            if s[x]==" ":
+                continue
+            start=x
+            break
         cheak=set("abcdefgijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
         ans=0
-        for x in range(l-1,-1,-1):
+        for x in range(start,-1,-1):
             if s[x]==' ':
                 break
             ans +=1
