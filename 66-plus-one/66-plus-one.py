@@ -7,9 +7,8 @@ class Solution:
                 return digits
             digits[i]=0
             i-=1
-        if i>-2:
-            digits.insert(0,1)   
-            return digits
+        digits.insert(0,1)   
+        return digits
             
             
         
