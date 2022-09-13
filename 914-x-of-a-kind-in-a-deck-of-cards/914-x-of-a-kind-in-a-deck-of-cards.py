@@ -14,7 +14,7 @@ class Solution:
         ans=0
         print(cheak)
         for x in cheak.keys():
-            ans=gcd(ans,cheak[x])
+            ans=gcd(max(ans,cheak[x]),min(ans,cheak[x]))
         if ans>1:
             return True
         return False
