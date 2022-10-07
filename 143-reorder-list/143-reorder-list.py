@@ -48,4 +48,3 @@ class Solution:
             s1=s2
             p2=p2.next
             s2=s2.next
-        return head
