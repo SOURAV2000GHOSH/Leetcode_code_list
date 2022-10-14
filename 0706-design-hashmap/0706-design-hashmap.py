@@ -1,20 +1,23 @@
 class MyHashMap:
 
     def __init__(self):
-        self.MyHashMap=dict()
+        self.MyHashMap=[-1]*(10**6+1)
+        self.cheak=set()
         
 
     def put(self, key: int, value: int) -> None:
         self.MyHashMap[key]=value
+        self.cheak.add(key)
         
 
     def get(self, key: int) -> int:
-        return self.MyHashMap[key] if key in self.MyHashMap else -1
+        return self.MyHashMap[key]
         
 
     def remove(self, key: int) -> None:
-        if key in self.MyHashMap:
-            self.MyHashMap.pop(key)
+        if key in self.cheak:
+            self.MyHashMap[key]=-1
+            self.cheak.remove(key)
             
 
 
