@@ -5,6 +5,7 @@ class Solution:
         l=0
         start=0
         while l<len(sentence):
+            #cheak all searchWord character have
             if start==len(searchWord):
                 break
             if sentence[l]!=searchWord[start]:
