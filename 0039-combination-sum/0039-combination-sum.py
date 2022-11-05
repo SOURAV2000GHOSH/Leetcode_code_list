@@ -1,8 +1,10 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         ans=[]
+        #this function calculate and and append list in ans
         def calculate(indx,n,arr,total,target):
-            if indx>=n:
+            #if indx 
+            if indx==n:
                 return
             if total==target:
                 temp=[]
