@@ -3,13 +3,13 @@ class Solution:
         m=len(maze)-1
         n=len(maze[0])-1
         q=deque()
-        q.append(tuple(entrance))
+        temp=tuple(entrance)
+        q.append(temp)
         visited=set()
-        visited.add(tuple(entrance))
+        visited.add(temp)
         level=0
         while len(q)>0:
             l=len(q)
-            
             for i in range(l):
                 position_x,position_y=q.popleft()
                 if [position_x,position_y] != entrance and (position_x==0 or position_x==m or position_y==0 or position_y==n):
