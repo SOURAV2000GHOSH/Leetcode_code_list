@@ -1,22 +1,15 @@
 class Solution:
     def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
         ans=[]
-        cheak=set()
-        def calculate(indx,n,arr,ans,cheak):
-            temp=tuple(arr)
-            if indx>=n:
-                if temp not in cheak:
-                    a=[]
-                    cheak.add(temp)
-                    for x in arr:
-                        a.append(x)
-                    ans.append(a)
-                return
-            arr.append(nums[indx])
-            calculate(indx+1,n,arr,ans,cheak)
-            arr.pop()
-            calculate(indx+1,n,arr,ans,cheak)
+        def calculate(indx,n,arr,ans):
+            ans.append([x for x in arr])
+            for i in range(indx,n):
+                if i>indx and nums[i]==nums[i-1]:
+                    continue
+                arr.append(nums[i])
+                calculate(i+1,n,arr,ans)
+                arr.pop()
         nums.sort()
-        calculate(0,len(nums),[],ans,cheak)
+        calculate(0,len(nums),[],ans)
         return ans
         
