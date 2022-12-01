@@ -1,8 +1,6 @@
 class Solution:
     def halvesAreAlike(self, s: str) -> bool:
         l=len(s)
-        if l==0:
-            return False
         cheak=set('aeiouAEIOU')
         count1=0
         count2=0
