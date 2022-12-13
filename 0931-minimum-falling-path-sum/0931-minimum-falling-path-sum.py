@@ -10,12 +10,15 @@ class Solution:
                 return matrix[row][col]
             min_val=1000000000000000
             total=matrix[row][col]
-            if row+1<n and col-1>=0:
-                min_val=min(min_val,total+solve(matrix,row+1,col-1,n)) 
-            if row+1<n:
-                min_val=min(min_val,total+solve(matrix,row+1,col,n))
-            if row+1<n and col+1<n:
-                min_val=min(min_val,total+solve(matrix,row+1,col+1,n))
+            for shift in [-1,0,1]:
+                if row+1<n and 0<=col+shift<n:
+                    min_val=min(min_val,total+solve(matrix,row+1,col+shift,n))
+            # if row+1<n and col-1>=0:
+            #     min_val=min(min_val,total+solve(matrix,row+1,col-1,n)) 
+            # if row+1<n:
+            #     min_val=min(min_val,total+solve(matrix,row+1,col,n))
+            # if row+1<n and col+1<n:
+            #     min_val=min(min_val,total+solve(matrix,row+1,col+1,n))
             cheak[row][col]=min_val
             return min_val
         minSum=10000000000000000000
