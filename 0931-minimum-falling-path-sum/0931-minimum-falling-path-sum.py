@@ -2,26 +2,18 @@
 class Solution:
     def minFallingPathSum(self, matrix: List[List[int]]) -> int:
         n=len(matrix)
-        cheak=[[-1 for x in range(101)] for i in range(101)]
-        def solve(matrix,row,col,n):
-            if cheak[row][col]!=-1:
-                return cheak[row][col]
-            if row==(n-1):
-                return matrix[row][col]
-            min_val=1000000000000000
-            total=matrix[row][col]
-            for shift in [-1,0,1]:
-                if row+1<n and 0<=col+shift<n:
-                    min_val=min(min_val,total+solve(matrix,row+1,col+shift,n))
-            # if row+1<n and col-1>=0:
-            #     min_val=min(min_val,total+solve(matrix,row+1,col-1,n)) 
-            # if row+1<n:
-            #     min_val=min(min_val,total+solve(matrix,row+1,col,n))
-            # if row+1<n and col+1<n:
-            #     min_val=min(min_val,total+solve(matrix,row+1,col+1,n))
-            cheak[row][col]=min_val
-            return min_val
-        minSum=10000000000000000000
-        for i in range(n):
-            minSum=min(minSum,solve(matrix,0,i,n))
+        t=[[0 for i in range(n)] for i in range(n)]
+        for col in range(n):
+            t[0][col]=matrix[0][col]
+        for row in range(1,n):
+            for col in range(n):
+                if col+1<n:
+                    t[row][col]=matrix[row][col]+min(t[row-1][col],t[row-1][col+1])
+                if col-1>=0:
+                    t[row][col]=matrix[row][col]+min(t[row-1][col-1],t[row-1][col])
+                if col+1<n and col-1>=0:
+                    t[row][col]=matrix[row][col]+min(t[row-1][col-1],t[row-1][col],t[row-1][col+1])
+        minSum=100000000000000
+        for col in range(n):
+            minSum=min(minSum,t[n-1][col])
         return minSum
