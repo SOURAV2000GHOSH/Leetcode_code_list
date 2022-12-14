@@ -1,17 +1,12 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        def solve(nums,n,i,check):
-            
-            if i>=n:
-                return 0
-            if check[i]!=-1:
-                return check[i]
-            thief=nums[i]+solve(nums,n,i+2,check)
-            skip=solve(nums,n,i+1,check)
-            check[i]=max(thief,skip)
-            return check[i]
         n=len(nums)
-        check=[-1]*n
-        return solve(nums,n,0,check)
+        t=[0]*(n+1)
+        t[1]=nums[0]
+        for i in range(2,(n+1)):
+            theft=nums[i-1]+t[i-2]
+            skip=t[i-1]
+            t[i]=max(theft,skip)
+        return t[-1]
         
         
