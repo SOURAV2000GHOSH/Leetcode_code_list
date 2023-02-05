@@ -1,5 +1,7 @@
 class Solution:
     def hasAlternatingBits(self, n: int) -> bool:
+        if n<=2:
+            return True
         temp=n%2
         n=n//2
         while n>0:
