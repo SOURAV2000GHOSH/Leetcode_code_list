@@ -1,22 +1,19 @@
 class Solution:
-    def traverse(self,temp,ans,n,check,nums):
-        if len(temp)==n:
-            ans.append(temp[:])
+    def swap(self,i,j,nums):
+        nums[i],nums[j]=nums[j],nums[i]
+    def traverse(self,ans,indx,n,nums):
+        if indx==n:
+            ans.append(nums[:])
             return
-        for j in range(n):
-                if check[j]:
-                    continue
-                temp.append(nums[j])
-                check[j]=True
-                self.traverse(temp,ans,n,check,nums)
-                temp.pop()
-                check[j]=False
-                # self.traverse(temp,ans,n,check,nums)              
+        for i in range(indx,n):
+            self.swap(i,indx,nums)
+            self.traverse(ans,indx+1,n,nums)
+            self.swap(i,indx,nums)
+                     
             
     def permute(self, nums: List[int]) -> List[List[int]]:
         l=len(nums)
         ans=[]
-        check=[False]*l
-        self.traverse([],ans,l,check,nums)
+        self.traverse(ans,0,l,nums)
         return ans
         
