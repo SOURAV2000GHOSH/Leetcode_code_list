@@ -1,23 +1,24 @@
 class Solution:
-    def swap(self,i,j,nums):
-        nums[i],nums[j]=nums[j],nums[i]
-    def dfs(self,nums,indx,n,ans,check):
-        if indx==n:
-            temp=tuple(nums)
-            if temp not in check:
-                ans.append(nums[:])
-                check.add(temp)
+    def dfs(self,temp,store,ans,n):
+        if len(temp)==n:
+            ans.append(temp[:])
             return
-        for i in range(indx,n):
-            if i>indx and nums[i]==nums[indx]:
-                continue
-            self.swap(i,indx,nums)
-            self.dfs(nums,indx+1,n,ans,check)
-            self.swap(i,indx,nums)
-            
+        for i in store:
+            if store[i]>0:
+                temp.append(i)
+                store[i]-=1
+                self.dfs(temp,store,ans,n)
+                temp.pop()
+                store[i]+=1
+                
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        store=dict()
+        for i in nums:
+            if i in store:
+                store[i]+=1
+            else:
+                store[i]=1
         ans=[]
-        check=set()
-        self.dfs(nums,0,len(nums),ans,check)
+        self.dfs([],store,ans,len(nums))
         return ans
         
