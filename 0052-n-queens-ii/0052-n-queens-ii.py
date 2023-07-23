@@ -1,5 +1,3 @@
-# class Solution:
-#     def totalNQueens(self, n: int) -> int:
 class Solution:
     def isSafe(self,row,col,board,n):
         drow=row
