@@ -1,13 +1,29 @@
 import java.util.*;
+class Node{
+    int vertex;
+    int color;
+    public Node(int vertex,int color){
+        this.vertex=vertex;
+        this.color=color;
+    }
+}
 class Solution {
     public static boolean solve(int u,int curCol,int []color,int [][]adj){
+        Queue<Node> t=new LinkedList<>();
         color[u]=curCol;
-        for(int v:adj[u]){
-            if(color[v]==curCol){
-                return false;
-            }
-            if(color[v]==-1 && !Solution.solve(v,1-curCol,color,adj)){
-                return false;
+        t.add(new Node(u,curCol));
+        while(t.size()>0){
+            Node n=t.poll();
+            int temU=n.vertex;
+            int temCol=n.color;
+            for(int v:adj[temU]){
+                if(color[v]==temCol){
+                    return false;
+                }
+                if(color[v]==-1){
+                    color[v]=1-temCol;
+                    t.add(new Node(v,color[v]));
+                }
             }
         }
         return true;
