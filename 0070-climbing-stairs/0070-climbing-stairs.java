@@ -1,15 +1,19 @@
 class Solution {
+    public static int solve(int ind,Integer []dp){
+        if(ind==1 || ind==2){
+            return ind;
+        }
+        if(dp[ind]!=null){
+            return dp[ind];
+        }
+        int takeOneStep=Solution.solve(ind-1,dp);
+        int takeTwoStep=Solution.solve(ind-2,dp);
+        dp[ind]=takeOneStep+takeTwoStep;
+        return dp[ind];
+    }
     public int climbStairs(int n) {
-        if(n==1 || n==2 || n==3)
-            return n;
-        int a=1,b=2,c=3;
-            for(int i=3;i<=n;i++){
-                c=b+a;
-                int temp_b=b;
-                b=c;
-                a=temp_b;                    
-            }
-        return c;
+        Integer []dp=new Integer[n+1];
+        return Solution.solve(n,dp);
         
     }
 }
