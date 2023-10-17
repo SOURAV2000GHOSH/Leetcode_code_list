@@ -1,54 +1,43 @@
 class Solution {
-    public boolean validateBinaryTreeNodes(int n, int[] leftChild, int[] rightChild) {
-        HashMap<Integer,Integer> store=new HashMap<>();
-        
-        for(int i=0;i<n;i++){
-            int l=leftChild[i],r=rightChild[i];
-            if(l!=-1){
-                if(store.containsKey(l)){
-                    return false;
-                }
-                store.put(l,i);
-                
-            }
-            if(r!=-1){
-                if(store.containsKey(r)){
-                    return false;
-                }
-                store.put(r,i);
-                
-            }
+    static int nodeCount=0;
+    public static int find(int i,int []parent){
+        if(parent[i]==i){
+            return i;
         }
-        int root=-1;
-        for(int i=0;i<n;i++){
-            if(!store.containsKey(i)){
-                if(root!=-1){
-                    return false;
-                }
-                root=i;
-            }
-        }
-        if(root==-1){
+        parent[i]=Solution.find(parent[i],parent);
+        return parent[i];
+    }
+    public static boolean union(int c,int p,int []parent){
+        int parentC=Solution.find(c,parent);
+        int parentP=Solution.find(p,parent);
+        if(parentC!=c){
             return false;
         }
-        int nodeCount=0;
-        Queue<Integer> q=new LinkedList<>();
-        q.add(root);
-        while(q.size()>0){
-            int i=q.poll();
-            nodeCount++;
-            int l=leftChild[i],r=rightChild[i];
-            if(l!=-1){
-                q.add(l);              
-            }
-            if(r!=-1){
-                q.add(r);               
-            }
-        }
-        if(nodeCount!=n){
+        if(parentP==c){
             return false;
         }
+        parent[c]=p;
+        Solution.nodeCount--;
         return true;
+    }
+    
+    public boolean validateBinaryTreeNodes(int n, int[] leftChild, int[] rightChild) {
+        Solution.nodeCount=n;
+        int parent[]=new int[n];
+        for(int i=0;i<n;i++){
+            parent[i]=i;
+        }
+        for(int i=0;i<n;i++){
+            int l=leftChild[i];
+            int r=rightChild[i];
+            if(l!=-1 && !Solution.union(l,i,parent)){
+                return false;
+            }
+            if(r!=-1 && !Solution.union(r,i,parent)){
+                return false;
+            }
+        }
+        return Solution.nodeCount==1;
         
     }
 }
