@@ -1,28 +1,33 @@
 class Solution {
-    public static boolean check(int i,int j,String s,Boolean [][]dp){
-        if(i>=j){
-            return true;
-        }
-        if(dp[i][j]!=null){
-            return dp[i][j];
-        }
-        if(s.charAt(i)==s.charAt(j)){
-            return Solution.check(++i,--j,s,dp);
-        }
-        return false;
-    }
-    public String longestPalindrome(String s) {
-        int n=s.length();
-        Boolean [][]dp=new Boolean[n][n];
-        int start=-1,maxLen=0;
-        for(int i=0;i<n;i++){
-            for(int j=i;j<n;j++){
-                if((j-i+1)>maxLen && Solution.check(i,j,s,dp)){
-                    maxLen=j-i+1;
-                    start=i;
+    public String longestPalindrome(String str) {
+        int ansLen=0,l=str.length();
+        int start=-1,end=-1;
+        
+        for(int i=0;i<l;i++){
+            //checking for odd length palindrom
+            int s=i,e=i;
+            while(s>=0 && e<l && str.charAt(s)==str.charAt(e)){
+                if((e-s+1)>ansLen){
+                    start=s;
+                    end=e;
+                    ansLen=(e-s+1);
                 }
+                s--;
+                e++;
+            }
+            s=i;
+            e=i+1;
+            while(s>=0 && e<l && str.charAt(s)==str.charAt(e)){
+                if((e-s+1)>ansLen){
+                    ansLen=(e-s+1);
+                    start=s;
+                    end=e;
+                }
+                s--;
+                e++;
             }
         }
-        return s.substring(start,start+maxLen);
+        return str.substring(start,end+1);
+        
     }
 }
