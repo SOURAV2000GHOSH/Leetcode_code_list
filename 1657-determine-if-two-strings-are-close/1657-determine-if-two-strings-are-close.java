@@ -1,26 +1,21 @@
 class Solution {
     public boolean closeStrings(String word1, String word2) {
-        //two words must be of same length in order to be close
-        if(word1.length()!=word2.length()){
+        int n1=word1.length(),n2=word2.length();
+        if(n1!=n2){
             return false;
         }
-        // next we check if count of distinct char's order is same
-        // for that we record freq of both words and sort then to check the above condition
-        int[] freq1=new int[26];
-        for(char i:word1.toCharArray()){
-            freq1[i-'a']++;
+        int []freq1=new int[26];
+        for(int i=0;i<n1;i++){
+            freq1[(int)(word1.charAt(i)-'a')]++;
         }
-        int[] freq2=new int[26];
-        for(char i:word2.toCharArray()){
-            if(freq1[i-'a']==0){   // we do this because both the words must contain same distinct char's
+        int []freq2=new int[26];
+        for(int i=0;i<n1;i++){
+            if(freq1[(int)(word2.charAt(i)-'a')]==0)
                 return false;
-            }
-            freq2[i-'a']++;
+            freq2[(int)(word2.charAt(i)-'a')]++;
         }
         Arrays.sort(freq1);
         Arrays.sort(freq2);
-        String first=Arrays.toString(freq1);
-        String second=Arrays.toString(freq2);
-        return first.equals(second);
+        return Arrays.toString(freq1).equals(Arrays.toString(freq2));
     }
 }
