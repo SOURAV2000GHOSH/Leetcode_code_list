@@ -1,19 +1,19 @@
 class Solution {
-    public static int solve(int ind,Integer []dp){
-        if(ind==1 || ind==2){
-            return ind;
+    public int []dp;
+    public int solve(int n){
+        if(n<3){
+            return n;
         }
-        if(dp[ind]!=null){
-            return dp[ind];
+        if(dp[n]!=0){
+            return dp[n];
         }
-        int takeOneStep=Solution.solve(ind-1,dp);
-        int takeTwoStep=Solution.solve(ind-2,dp);
-        dp[ind]=takeOneStep+takeTwoStep;
-        return dp[ind];
+        int takeOne=solve(n-1);
+        int takeTwo=solve(n-2);
+        dp[n]=takeOne+takeTwo;
+        return dp[n];
     }
     public int climbStairs(int n) {
-        Integer []dp=new Integer[n+1];
-        return Solution.solve(n,dp);
-        
+        dp=new int[n+1];
+        return solve(n);
     }
 }
