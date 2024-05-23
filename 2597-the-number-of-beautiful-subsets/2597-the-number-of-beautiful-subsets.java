@@ -1,36 +1,27 @@
 class Solution {
-    public boolean check(List<Integer> store,int k){
-        int l=store.size();
-        if(l==0)
-            return false;
-        else if(l==1)
-            return true;
-        for(int i=0;i<l;i++){
-            for(int j=i+1;j<l;j++){
-                if(store.get(j)-store.get(i)==k)
-                    return false;
-            }
+    public static int ans;
+    public void backtrack(int ind,int n,int k,int []nums,Set<Integer> store){
+        if(ind>=n){
+            Solution.ans++;
+            return;
         }
-        return true;
-    }
-    
-    public int backtrack(int ind,int k,int n,List<Integer> store,int[] nums){
-        if(ind==n){
-            if(check(store,k)){
-                return 1;
-            }
-            return 0;
+        backtrack(ind+1,n,k,nums,store);
+        
+        if(!store.contains(nums[ind]+k) && !store.contains(nums[ind]-k)){
+            store.add(nums[ind]);
+            backtrack(ind+1,n,k,nums,store);
+            store.remove(nums[ind]);
         }
-        store.add(nums[ind]);
-        int a=backtrack(ind+1,k,n,store,nums);
-        store.removeLast();
-        int b=backtrack(ind+1,k,n,store,nums);
-        return a+b;
+        
     }
     public int beautifulSubsets(int[] nums, int k) {
         Arrays.sort(nums);
-        List<Integer> store=new ArrayList<>();    
-        return backtrack(0,k,nums.length,store,nums);
-        
+        for(int n:nums){
+            System.out.print(n+",");
+        }
+        Set<Integer> store=new HashSet<>();    
+        Solution.ans=0;
+        backtrack(0,nums.length,k,nums,store);
+        return ans-1;
     }
 }
