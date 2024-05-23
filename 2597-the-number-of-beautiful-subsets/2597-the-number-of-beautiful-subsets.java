@@ -14,24 +14,23 @@ class Solution {
         return true;
     }
     
-    public void backtrack(int ind,int k,int n,int[] ans,List<Integer> store,int[] nums){
+    public int backtrack(int ind,int k,int n,List<Integer> store,int[] nums){
         if(ind==n){
             if(check(store,k)){
-                ans[0]+=1;
+                return 1;
             }
-            return;
+            return 0;
         }
         store.add(nums[ind]);
-        backtrack(ind+1,k,n,ans,store,nums);
+        int a=backtrack(ind+1,k,n,store,nums);
         store.removeLast();
-        backtrack(ind+1,k,n,ans,store,nums);
+        int b=backtrack(ind+1,k,n,store,nums);
+        return a+b;
     }
     public int beautifulSubsets(int[] nums, int k) {
         Arrays.sort(nums);
-        List<Integer> store=new ArrayList<>();
-        int []ans={0};
-        backtrack(0,k,nums.length,ans,store,nums);
-        return ans[0];
+        List<Integer> store=new ArrayList<>();    
+        return backtrack(0,k,nums.length,store,nums);
         
     }
 }
