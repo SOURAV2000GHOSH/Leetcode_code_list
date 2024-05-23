@@ -7,7 +7,7 @@ class Solution {
             return true;
         for(int i=0;i<l;i++){
             for(int j=i+1;j<l;j++){
-                if(Math.abs(store.get(j)-store.get(i))==k)
+                if(store.get(j)-store.get(i)==k)
                     return false;
             }
         }
@@ -27,6 +27,7 @@ class Solution {
         backtrack(ind+1,k,n,ans,store,nums);
     }
     public int beautifulSubsets(int[] nums, int k) {
+        Arrays.sort(nums);
         List<Integer> store=new ArrayList<>();
         int []ans={0};
         backtrack(0,k,nums.length,ans,store,nums);
