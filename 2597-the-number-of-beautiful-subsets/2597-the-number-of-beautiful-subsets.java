@@ -16,9 +16,6 @@ class Solution {
     }
     public int beautifulSubsets(int[] nums, int k) {
         Arrays.sort(nums);
-        for(int n:nums){
-            System.out.print(n+",");
-        }
         Set<Integer> store=new HashSet<>();    
         Solution.ans=0;
         backtrack(0,nums.length,k,nums,store);
