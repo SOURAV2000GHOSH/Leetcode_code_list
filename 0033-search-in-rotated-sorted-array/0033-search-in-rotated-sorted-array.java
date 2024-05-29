@@ -6,13 +6,16 @@ class Solution {
             if(nums[mid]==target){
                 return mid;
             }
+            //right half is sorted
            else if(nums[mid]<=nums[end]){
                if(target>nums[mid] && target<=nums[end]){
                    start=mid+1;
                }else{
                    end=mid-1;
                }
-           }else{
+           }
+            //left half is sorted
+            else{
                if(target>=nums[start] && target<nums[mid]){
                    end=mid-1;
                }else{
