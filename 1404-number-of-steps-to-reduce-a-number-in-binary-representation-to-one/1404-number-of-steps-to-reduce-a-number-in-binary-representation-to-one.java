@@ -1,35 +1,16 @@
 class Solution {
-    public String change(String str){
-        String s=new String();
-        int i=str.length()-1;
-        while(i>=0){
-            char temp=str.charAt(i);
-            if(temp=='1'){
-                s="0"+s;
-            }else{
-                s="1"+s;
-                break;
-            }
-            i--;
-        }
-        if(i>=0)
-            s=str.substring(0,i)+s;
-        if(i==-1){
-            s="1"+s;
-        }
-        return s;
-    }
     public int numSteps(String s) {
-        int step=0;
-        while(s.length()!=1){
-            if(s.charAt(s.length()-1)=='1'){
-                s=change(s);
+        int stepCount=0;
+        int carry=0;
+        for(int i=s.length()-1;i>0;i--){
+            if((s.charAt(i)-'0'+carry)%2==1){
+                stepCount+=2;
+                carry=1;
             }else{
-                s=s.substring(0,s.length()-1);
+                stepCount++;
             }
-            step++;
         }
-        return step;
+        return stepCount+carry;
         
     }
 }
