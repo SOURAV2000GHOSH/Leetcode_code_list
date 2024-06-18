@@ -28,13 +28,7 @@ class Solution {
         for(int i=0;i<n;i++){
             store.add(new Node(difficulty[i],profit[i]));
         }
-        Collections.sort(store,(a,b)->{
-            if(a.dif!=b.dif){
-                return a.dif-b.dif;
-            }else{
-                return a.profit-b.profit;
-            }
-        });
+        Collections.sort(store,(a,b)->a.dif-b.dif);
         int maxProfit=0;
         for(int i=0;i<store.size();i++){
             Node temp=store.get(i);
