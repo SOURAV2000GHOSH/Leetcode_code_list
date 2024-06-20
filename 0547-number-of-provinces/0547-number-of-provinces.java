@@ -1,9 +1,25 @@
 class Solution {
-    public void traverse(ArrayList<ArrayList<Integer>> adj,boolean []visited,int u){
+    public void dfs(ArrayList<ArrayList<Integer>> adj,boolean []visited,int u){
         visited[u]=true;
         for(int v:adj.get(u)){
             if(!visited[v]){
-                traverse(adj,visited,v);
+                dfs(adj,visited,v);
+            }
+        }
+    }
+    
+    public void bfs(ArrayList<ArrayList<Integer>> adj,boolean []visited,int u){
+        Queue<Integer> q=new LinkedList<>();
+        q.add(u);
+        while(q.size()>0){
+            int tempU=q.remove();
+            if(visited[tempU]){
+                continue;
+            }
+            visited[tempU]=true;
+            for(int v:adj.get(tempU)){
+                if(!visited[v])
+                    q.add(v);
             }
         }
     }
@@ -26,7 +42,8 @@ class Solution {
         }
         for(int i=0;i<n;i++){
             if(!visited[i]){
-                traverse(adj,visited,i);
+                // dfs(adj,visited,i);
+                bfs(adj,visited,i);
                 count++;
             }
         }
