@@ -1,57 +1,45 @@
+class Node{
+    int val,ind;
+    public Node(int v,int i){
+        val=v;
+        ind=i;
+    }
+}
+
 class Solution {
-    static int[] maxDeque;
-    static int[] minDeque;
-    static int maxHead;
-    static int maxTail;
-    static int minHead;
-    static int minTail;
-
+    public void checkAndRemove(int i,PriorityQueue<Node> pq){
+        while(pq.size()>0 && pq.peek().ind<i){
+            pq.poll();
+        }
+    }
+    
     public int longestSubarray(int[] nums, int limit) {
-        int n = nums.length;
-        maxDeque = new int[n];
-        minDeque = new int[n];
-        maxHead = 0;
-        maxTail = 0;
-        minHead = 0;
-        minTail = 0;
-
-        int res = 0;
-        int r = 0;
-        for (int l = 0; l < n; l++) {
-            while (r < n && withinLimit(nums, nums[r], limit)) {
-                addToLast(nums, r);
-                r++;
+        PriorityQueue<Node> minHeap=new PriorityQueue<>((a,b)->{
+            if(a.val!=b.val)
+                return a.val-b.val;
+            return a.ind-b.ind;
+        });
+        PriorityQueue<Node> maxHeap=new PriorityQueue<>((a,b)->{
+            if(a.val!=b.val)
+                return b.val-a.val;
+            return a.ind-b.ind;
+        });
+        int i=0,j=0;
+        int ans=0,n=nums.length;
+        while(i<n && j<n){
+            minHeap.add(new Node(nums[j],j));
+            maxHeap.add(new Node(nums[j],j));
+            Node min=minHeap.peek();
+            Node max=maxHeap.peek();
+            if(Math.abs(max.val-min.val)<=limit){
+                ans=Math.max(ans,(j-i+1));
+            }else{
+                i=Math.min(min.ind,max.ind)+1;
+                checkAndRemove(i,minHeap);
+                checkAndRemove(i,maxHeap);
             }
-            res = Math.max(res, r - l);
-            removeExpired(l);
+            j++;
         }
-        return res;
-    }
-
-    public boolean withinLimit(int[] nums, int num, int limit) {
-        int max = maxHead < maxTail ? Math.max(nums[maxDeque[maxHead]], num) : num;
-        int min = minHead < minTail ? Math.min(nums[minDeque[minHead]], num) : num;
-        return max - min <= limit;
-    }
-
-    public void addToLast(int[] nums, int r) {
-        while (maxHead < maxTail && nums[maxDeque[maxTail - 1]] <= nums[r]) {
-            maxTail--;
-        }
-        maxDeque[maxTail++] = r;
-
-        while (minHead < minTail && nums[minDeque[minTail - 1]] >= nums[r]) {
-            minTail--;
-        }
-        minDeque[minTail++] = r;
-    }
-
-    public void removeExpired(int l) {
-        if (maxDeque[maxHead] == l) {
-            maxHead++;
-        }
-        if (minDeque[minHead] == l) {
-            minHead++;
-        }
+        return ans;
     }
 }
