@@ -1,14 +1,19 @@
 class Solution {
     public int findTheWinner(int n, int k) {
-        List<Integer> arr=new ArrayList<>();
+        Queue<Integer> arr=new LinkedList<>();
         for(int i=1;i<=n;i++){
             arr.add(i);
         }
-        int idx=0;
+        int temp=1;
         while(arr.size()>1){
-            idx=(idx+k-1)%arr.size();
-            arr.remove(idx);
+            int first=arr.poll();
+            if(temp==k){
+                temp=1;
+            }else{
+                arr.add(first);
+                temp++;
+            }
         }
-        return arr.get(0);
+        return arr.peek();
     }
 }
