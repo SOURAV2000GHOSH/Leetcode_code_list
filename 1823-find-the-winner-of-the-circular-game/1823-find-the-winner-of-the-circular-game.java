@@ -1,19 +1,13 @@
 class Solution {
+    public int findIndex(int n,int k){
+        if(n==1){
+            return 0;
+        }
+        int idx=findIndex(n-1,k);
+        idx=(idx+k)%n;
+        return idx;
+    }
     public int findTheWinner(int n, int k) {
-        Queue<Integer> arr=new LinkedList<>();
-        for(int i=1;i<=n;i++){
-            arr.add(i);
-        }
-        int temp=1;
-        while(arr.size()>1){
-            int first=arr.poll();
-            if(temp==k){
-                temp=1;
-            }else{
-                arr.add(first);
-                temp++;
-            }
-        }
-        return arr.peek();
+        return findIndex(n,k)+1;
     }
 }
