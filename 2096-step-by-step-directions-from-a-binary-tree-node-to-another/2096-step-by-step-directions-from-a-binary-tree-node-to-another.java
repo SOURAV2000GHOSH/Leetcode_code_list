@@ -13,6 +13,7 @@
  *     }
  * }
  */
+// Use for storing data and calculation purpose
 class Node{
     int level;
     TreeNode root;
@@ -22,8 +23,8 @@ class Node{
     }
 }
 class Solution {
-    Map<Integer,Node> startParents;
-    Map<Integer,Node> destParents;
+    // Map<Integer,Node> startParents;
+    // Map<Integer,Node> destParents;
     public boolean findParent(TreeNode root,int value,int level,Map<Integer,Node> store){
         if(root==null)
             return false;
@@ -56,8 +57,8 @@ class Solution {
     }
     public String getDirections(TreeNode root, int startValue, int destValue) {
         //finding all ancestor
-        startParents=new HashMap<>();
-        destParents=new HashMap<>();
+        Map<Integer,Node> startParents=new HashMap<>();
+        Map<Integer,Node> destParents=new HashMap<>();
         findParent(root,startValue,0,startParents);
         findParent(root,destValue,0,destParents);
         // getting common closest ancestor
